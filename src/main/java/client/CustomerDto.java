@@ -12,7 +12,7 @@ public class CustomerDto {
     private Long customerNumber;
     private String name;
     private String email;
-//    private List<Reservation> reservations;
+    private List<Reservation> reservations;
 
     public Long getCustomerNumber() {
         return customerNumber;
@@ -38,11 +38,35 @@ public class CustomerDto {
         this.email = email;
     }
 
+    public CustomerDto(Long customerNumber, String name, String email, List<Reservation> reservation) {
+        this.customerNumber = customerNumber;
+        this.name = name;
+        this.email = email;
+    }
     public CustomerDto(Long customerNumber, String name, String email) {
         this.customerNumber = customerNumber;
         this.name = name;
         this.email = email;
     }
     public CustomerDto(){}
+
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerDto{" +
+                "customerNumber=" + customerNumber +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", reservations=" + reservations +
+                '}';
+    }
 }
 

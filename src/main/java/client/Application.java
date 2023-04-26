@@ -42,6 +42,28 @@ public class Application implements CommandLineRunner {
 		System.out.println("CREATING CARS DONE 5 ==============");
 
 
+		System.out.println("UPDATING CUSTOMERS==============");
+		restTemplate.put(customerUrl+"/update/{customernumber}", new CustomerDto(1L,"Farida Irekeola","fashir@gmail.com"),1L);
+		restTemplate.put(customerUrl+"/update/{customernumber}", new CustomerDto(2L,"Saidu Ogono","smusa@gmail.com"),2L);
+		System.out.println("CREATING CARS DONE 5 ==============");
+
+		System.out.println("GET ALL CUSTOMERS==============");
+		CustomersDto customersDto = restTemplate.getForObject(customerUrl + "", CustomersDto.class);
+		System.out.println("Customers ;:::: " + customersDto);
+		System.out.println("GET ALL CUSTOMERS DONE 1 ==============");
+
+		System.out.println("GET ALL CUSTOMERS==============");
+		UriComponentsBuilder ajouriBuilder = UriComponentsBuilder.fromUriString(customerUrl+"/search")
+				.queryParam("searchBy", "customernumber")
+				.queryParam("value", 1L);
+		CustomersDto ajoDtos = restTemplate.getForObject(ajouriBuilder.toUriString(), CustomersDto.class);
+
+		System.out.println("Customers Ajo ;:::: " + ajoDtos);
+		System.out.println("GET ALL CUSTOMERS DONE 1 ==============");
+
+
+
+
 		System.out.println("SEARCH CARS ==============");
 
 
@@ -74,6 +96,19 @@ public class Application implements CommandLineRunner {
     	System.out.println("RETURNING 3 CARS DONE==============");
 
 
+
+		System.out.println("GET ALL CUSTOMERS WITH PAYMENT AND RESERVATION INFO==============");
+		CustomerDataDto customer = restTemplate.getForObject(customerUrl + "/{customerNumber}/get", CustomerDataDto.class, 1L);
+
+		System.out.println("Customers ;:::: " + customer);
+		System.out.println("GET ALL CUSTOMERS WITH PAYMENT AND RESERVATION INFO DONE 1 ==============");
+
+
+		System.out.println("GET ALL CAR DATA WITH  RESERVATION INFO==============");
+		CarDataPojo carDataPojo = restTemplate.getForObject(reservationUrl + "/{licensePlate}/get", CarDataPojo.class, "AB1");
+
+		System.out.println("CarDataPojo ;:::: " + customer);
+		System.out.println("GET ALL CAR DATA WITH  RESERVATION INFO DONE 1 ==============");
 
 	}
 }
