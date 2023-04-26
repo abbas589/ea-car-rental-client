@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -47,15 +48,15 @@ public class Application implements CommandLineRunner {
 		UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(reservationUrl+"/search")
 				.queryParam("type", "IS250");
 		CarsDto carsDto = restTemplate.getForObject(uriBuilder.toUriString(), CarsDto.class);
-		logger.info("Car DTO REST Response searchCarFromFleet()::: {}",carsDto);
+		System.out.println("Car DTO REST Response searchCarFromFleet()::: {} "+carsDto);
 		System.out.println("SEARCH CARS DONE  ==============");
 
 		System.out.println("CREATING RESERVATIONS ==============");
-		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("IS250",1L));
-		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("COROLLA",2L));
-		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("GLE450",3L));
-		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("PATHFINDER",4L));
-		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("IS250",5L));
+		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("IS250",1L, LocalDate.of(2023,4,26), LocalDate.of(2023,12,26)));
+		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("COROLLA",2L,LocalDate.of(2023,4,26), LocalDate.of(2023,11,26)));
+		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("GLE450",3L,LocalDate.of(2023,4,26), LocalDate.of(2023,10,26)));
+		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("PATHFINDER",4L,LocalDate.of(2023,4,26), LocalDate.of(2023,9,26)));
+		restTemplate.postForLocation(reservationUrl+"/create", new ReservationRequestDto("IS250",5L,LocalDate.of(2023,4,26), LocalDate.of(2023,8,26)));
 		System.out.println("CREATING RESERVATIONS DONE 5 ==============");
 
 

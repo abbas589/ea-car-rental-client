@@ -23,6 +23,9 @@ public class CarsDto {
         this.cars = cars;
     }
 
+    public CarsDto() {
+    }
+
     @Override
     public String toString() {
         return "Car List{" +
